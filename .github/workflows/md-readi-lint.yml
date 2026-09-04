@@ -1,0 +1,19 @@
+name: Md-ReadI Documentation Lint
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+
+jobs:
+  lint-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Fetch and Execute Locked Format Checker
+        run: |
+          curl -sSL https://raw.githubusercontent.com/AeonDigital/MD-ReadI/refs/heads/main/package.sh -o md_readi.sh
+          chmod +x md_readi.sh
+          ./md_readi.sh --check
